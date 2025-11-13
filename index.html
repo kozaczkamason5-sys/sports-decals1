@@ -1,0 +1,156 @@
+sd-sports-decals/
+├── generate_site.py
+├── templates/
+│   └── index_template.html
+├── static/
+│   ├── style.css
+│   └── logo.svg
+├── data/
+│   └── products.json
+└── README.md
+from pathlib import Path
+import json
+
+# Load data
+with open("data/products.json", "r") as f:
+    products = json.load(f)
+
+# Load template
+template = Path("templates/index_template.html").read_text()
+
+# Generate product cards
+cards = ""
+for p in products:
+    cards += f"""
+    <div class="product-card">
+        <img src="{p['image']}" alt="{p['name']}">
+        <h3>{p['name']}</h3>
+        <p>{p['price']}</p>
+    </div>
+    """
+
+# Replace placeholder
+html = template.replace("{{ products }}", cards)
+
+# Write final site
+Path("site").mkdir(exist_ok=True)
+Path("site/static").mkdir(exist_ok=True)
+(Path("site") / "index.html").write_text(html)
+
+# Copy static files
+for asset in Path("static").glob("*"):
+    (Path("site/static") / asset.name).write_bytes(asset.read_bytes())
+
+print("✅ Site built successfully! Check the 'site' folder.")
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SD Sports Decals</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <header>
+    <img src="static/logo.svg" alt="SD Sports Decals Logo" class="logo">
+    <h1>SD Sports Decals</h1>
+    <p>Custom Decals for Sports Teams and Athletes</p>
+  </header>
+
+  <section class="products">
+    <h2>Shop Our Decals</h2>
+    <div class="product-grid">
+      {{ products }}
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 SD Sports Decals | Contact: <a href="mailto:orders@sdsportsdecals.com">orders@sdsportsdecals.com</a></p>
+  </footer>
+</body>
+</html>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fb;
+  color: #111;
+  text-align: center;
+}
+
+header {
+  background: linear-gradient(135deg, #001F3F, #0050FF);
+  color: white;
+  padding: 2rem 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.products {
+  padding: 2rem;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.product-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 1rem;
+  width: 200px;
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+footer {
+  background: #001F3F;
+  color: white;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#001F3F"/>
+      <stop offset="100%" stop-color="#0050FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="200" fill="#fff"/>
+  <text x="50" y="150" font-family="Impact, Arial Black, sans-serif" font-size="140" font-weight="900" fill="url(#grad)">SD</text>
+</svg>
+[
+  {"name": "Football Helmet Decal", "price": "$8.99", "image": "static/football.png"},
+  {"name": "Hockey Team Sticker", "price": "$6.99", "image": "static/hockey.png"},
+  {"name": "Baseball Logo Pack", "price": "$5.49", "image": "static/baseball.png"}
+]
+# 🏈 SD Sports Decals
+
+A static website generated with **Python** for selling custom **sports decals**.  
+Includes a bold “SD” logo, product grid, and easy GitHub Pages deployment.
+
+---
+
+## 🚀 How to Build
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/<your-username>/sd-sports-decals.git
+   cd sd-sports-decals
+python generate_site.py
