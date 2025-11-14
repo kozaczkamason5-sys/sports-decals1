@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6fa;
+  text-align: center;
+}
+
+.hero {
+  background: linear-gradient(135deg, #002b5c, #007bff);
+  color: white;
+  padding: 3rem 1rem;
+}
+
+.logo {
+  width: 140px;
+  margin-bottom: 1rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 1.2rem;
+}
+
+.btn-primary {
+  background: white;
+  color: #002b5c;
+}
+
+.btn-secondary {
+  background: #002b5c;
+  color: white;
+}
+
+.products {
+  padding: 2rem;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.product-card {
+  background: white;
+  border-radius: 10px;
+  width: 200px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.testimonials {
+  background: #e7ebf3;
+  padding: 2rem;
+}
+
+.contact {
+  padding: 2rem;
+}
+
+footer {
+  background: #002b5c;
+  color: white;
+  padding: 1rem;
+}
