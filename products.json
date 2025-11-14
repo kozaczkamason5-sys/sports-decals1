@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Football Helmet Decal",
+    "price": "$8.99",
+    "image": "static/football.png"
+  },
+  {
+    "name": "Baseball Team Sticker",
+    "price": "$6.49",
+    "image": "static/baseball.png"
+  },
+  {
+    "name": "Hockey Logo Decal",
+    "price": "$5.99",
+    "image": "static/hockey.png"
+  }
+]
