@@ -1,21 +1,27 @@
 sd-sports-decals/
-├── generate_site.py
+│   generate_site.py
+│   README.md
+│
 ├── templates/
-│   └── index_template.html
+│     index_template.html
+│
 ├── static/
-│   ├── style.css
-│   └── logo.svg
-├── data/
-│   └── products.json
-└── README.md
+│     style.css
+│     logo.svg
+│     football.png
+│     baseball.png
+│     hockey.png
+│
+└── data/
+      products.json
 from pathlib import Path
 import json
 
-# Load data
+# Load product data
 with open("data/products.json", "r") as f:
     products = json.load(f)
 
-# Load template
+# Load the HTML template
 template = Path("templates/index_template.html").read_text()
 
 # Generate product cards
@@ -29,65 +35,96 @@ for p in products:
     </div>
     """
 
-# Replace placeholder
+# Insert cards into template
 html = template.replace("{{ products }}", cards)
 
-# Write final site
-Path("site").mkdir(exist_ok=True)
-Path("site/static").mkdir(exist_ok=True)
+# Build output folder
+Path("site/static").mkdir(parents=True, exist_ok=True)
+
 (Path("site") / "index.html").write_text(html)
 
 # Copy static files
 for asset in Path("static").glob("*"):
     (Path("site/static") / asset.name).write_bytes(asset.read_bytes())
 
-print("✅ Site built successfully! Check the 'site' folder.")
+print("✅ Site built! Open site/index.html to preview.")
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SD Sports Decals</title>
-  <link rel="stylesheet" href="static/style.css">
+  <link rel="stylesheet" href="static/style.css" />
 </head>
+
 <body>
-  <header>
-    <img src="static/logo.svg" alt="SD Sports Decals Logo" class="logo">
+  <header class="hero">
+    <img src="static/logo.svg" class="logo" alt="SD Logo" />
     <h1>SD Sports Decals</h1>
-    <p>Custom Decals for Sports Teams and Athletes</p>
+    <p>Custom, high-quality decals for teams, athletes, and fans.</p>
+    <a href="#shop" class="btn-primary">Shop Decals</a>
   </header>
 
-  <section class="products">
-    <h2>Shop Our Decals</h2>
+  <section id="shop" class="products">
+    <h2>Our Top Decals</h2>
     <div class="product-grid">
       {{ products }}
     </div>
   </section>
 
+  <section class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <blockquote>"Amazing quality! Our helmets look awesome this year." – Coach Ramirez</blockquote>
+    <blockquote>"Fast delivery and great detail." – Jordan P.</blockquote>
+  </section>
+
+  <section class="contact">
+    <h2>Contact</h2>
+    <p>Need something custom?</p>
+    <a href="mailto:orders@sdsportsdecals.com" class="btn-secondary">Email Us</a>
+  </section>
+
   <footer>
-    <p>© 2025 SD Sports Decals | Contact: <a href="mailto:orders@sdsportsdecals.com">orders@sdsportsdecals.com</a></p>
+    <p>© 2025 SD Sports Decals</p>
   </footer>
 </body>
 </html>
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f4f7fb;
-  color: #111;
+  background: #f4f6fa;
   text-align: center;
 }
 
-header {
-  background: linear-gradient(135deg, #001F3F, #0050FF);
+.hero {
+  background: linear-gradient(135deg, #002b5c, #007bff);
   color: white;
-  padding: 2rem 1rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  padding: 3rem 1rem;
 }
 
 .logo {
-  width: 120px;
-  height: auto;
+  width: 140px;
   margin-bottom: 1rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 1.2rem;
+}
+
+.btn-primary {
+  background: white;
+  color: #002b5c;
+}
+
+.btn-secondary {
+  background: #002b5c;
+  color: white;
 }
 
 .products {
@@ -97,60 +134,61 @@ header {
 .product-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 1.5rem;
+  justify-content: center;
 }
 
 .product-card {
   background: white;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  padding: 1rem;
   width: 200px;
-  transition: transform 0.2s;
-}
-
-.product-card:hover {
-  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1rem;
 }
 
 .product-card img {
   width: 100%;
-  border-radius: 6px;
+  border-radius: 8px;
+}
+
+.testimonials {
+  background: #e7ebf3;
+  padding: 2rem;
+}
+
+.contact {
+  padding: 2rem;
 }
 
 footer {
-  background: #001F3F;
+  background: #002b5c;
   color: white;
   padding: 1rem;
-  margin-top: 2rem;
 }
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
   <defs>
     <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#001F3F"/>
-      <stop offset="100%" stop-color="#0050FF"/>
+      <stop offset="0%" stop-color="#002b5c"/>
+      <stop offset="100%" stop-color="#007bff"/>
     </linearGradient>
   </defs>
-  <rect width="400" height="200" fill="#fff"/>
-  <text x="50" y="150" font-family="Impact, Arial Black, sans-serif" font-size="140" font-weight="900" fill="url(#grad)">SD</text>
+  <rect width="400" height="200" fill="#ffffff"/>
+  <text x="30" y="150" font-size="150" font-family="Impact" fill="url(#grad)">SD</text>
 </svg>
 [
-  {"name": "Football Helmet Decal", "price": "$8.99", "image": "static/football.png"},
-  {"name": "Hockey Team Sticker", "price": "$6.99", "image": "static/hockey.png"},
-  {"name": "Baseball Logo Pack", "price": "$5.49", "image": "static/baseball.png"}
+  {
+    "name": "Football Helmet Decal",
+    "price": "$8.99",
+    "image": "static/football.png"
+  },
+  {
+    "name": "Baseball Team Sticker",
+    "price": "$6.49",
+    "image": "static/baseball.png"
+  },
+  {
+    "name": "Hockey Logo Decal",
+    "price": "$5.99",
+    "image": "static/hockey.png"
+  }
 ]
-# 🏈 SD Sports Decals
-
-A static website generated with **Python** for selling custom **sports decals**.  
-Includes a bold “SD” logo, product grid, and easy GitHub Pages deployment.
-
----
-
-## 🚀 How to Build
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/<your-username>/sd-sports-decals.git
-   cd sd-sports-decals
-python generate_site.py
