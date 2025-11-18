@@ -4,62 +4,136 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SD Sports Decals</title>
-    <link rel="stylesheet" href="style.css" />
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #222;
+        }
+        header {
+            background: #111;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        nav {
+            text-align: center;
+            padding: 15px;
+            background: #333;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=1200&q=60') center/cover no-repeat;
+            color: white;
+        }
+        .hero h2 {
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 5px black;
+        }
+        .section {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+        .product {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .product h3 {
+            margin-top: 0;
+        }
+        .buy-btn {
+            display: inline-block;
+            margin-top: 15px;
+            background: #0070f3;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .buy-btn:hover {
+            background: #0055c9;
+        }
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
 </head>
-
 <body>
 
-    <!-- Header / Hero Section -->
-    <header class="hero">
-        <div class="logo">SD</div>
-        <h1>SD Sports Decals</h1>
-        <p>Premium sports decals for teams, athletes, and fans.</p>
-        <a href="#products" class="btn-primary">Shop Now</a>
-    </header>
+<header>
+    <h1>SD Sports Decals</h1>
+    <p>Custom Helmet Decals • Sports Stickers • Visors</p>
+</header>
 
-    <!-- Product Section -->
-    <section id="products" class="products">
-        <h2>Top Selling Decals</h2>
+<nav>
+    <a href="#decals">Decals</a>
+    <a href="#visor">Visors</a>
+    <a href="#contact">Contact</a>
+</nav>
 
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="football.png" alt="Football Helmet Decal">
-                <h3>Football Helmet Decal</h3>
-                <p>$8.99</p>
-            </div>
+<section class="hero">
+    <h2>Customize Your Game. Stand Out On The Field.</h2>
+</section>
 
-            <div class="product-card">
-                <img src="baseball.png" alt="Baseball Team Sticker">
-                <h3>Baseball Team Sticker</h3>
-                <p>$6.49</p>
-            </div>
+<section id="decals" class="section">
+    <h2>Sports Decals</h2>
 
-            <div class="product-card">
-                <img src="hockey.png" alt="Hockey Logo Decal">
-                <h3>Hockey Logo Decal</h3>
-                <p>$5.99</p>
-            </div>
-        </div>
-    </section>
+    <div class="product">
+        <h3>Custom Football Helmet Decals</h3>
+        <p>High-quality vinyl decals for football helmets. Fully customizable with colors, text, and team logo choices.</p>
+        <p><strong>Price:</strong> $15.00</p>
+        <a class="buy-btn" href="#">Buy Now</a>
+    </div>
 
-    <!-- Testimonials -->
-    <section class="testimonials">
-        <h2>What Teams Are Saying</h2>
-        <blockquote>"These decals made our helmets look incredible!" — Coach Martinez</blockquote>
-        <blockquote>"Fast delivery and awesome quality. 5 stars." — Jordan P.</blockquote>
-    </section>
+    <div class="product">
+        <h3>Team Logo Sticker Pack</h3>
+        <p>Includes 6 small logo stickers perfect for helmets, water bottles, gear bags, and more.</p>
+        <p><strong>Price:</strong> $8.00</p>
+        <a class="buy-btn" href="#">Buy Now</a>
+    </div>
+</section>
 
-    <!-- Contact -->
-    <section class="contact">
-        <h2>Contact Us</h2>
-        <p>Need custom decals or large team orders?</p>
-        <a href="mailto:orders@sdsportsdecals.com" class="btn-secondary">Email Us</a>
-    </section>
+<section id="visor" class="section">
+    <h2>Football Visors</h2>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 SD Sports Decals</p>
-    </footer>
+    <div class="product">
+        <h3>Anti-Glare Tinted Football Visor</h3>
+        <p>Durable, scratch-resistant visor compatible with most football helmets. Includes hardware kit.</p>
+        <p><strong>Price:</strong> $35.00</p>
+        <a class="buy-btn" href="#">Buy Visor</a>
+    </div>
+</section>
+
+<section id="contact" class="section">
+    <h2>Contact</h2>
+    <p>Questions or custom order requests?</p>
+    <p>Email: <strong>support@sdsportsdecals.com</strong></p>
+</section>
+
+<footer>
+    <p>© 2025 SD Sports Decals. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
