@@ -1,179 +1,65 @@
-
-from pathlib import Path
-import json
-
-# Load product data
-with open("data/products.json", "r") as f:
-    products = json.load(f)
-
-# Load the HTML template
-template = Path("templates/index_template.html").read_text()
-
-# Generate product cards
-cards = ""
-for p in products:
-    cards += f"""
-    <div class="product-card">
-        <img src="{p['image']}" alt="{p['name']}">
-        <h3>{p['name']}</h3>
-        <p>{p['price']}</p>
-    </div>
-    """
-
-# Insert cards into template
-html = template.replace("{{ products }}", cards)
-
-# Build output folder
-Path("site/static").mkdir(parents=True, exist_ok=True)
-
-(Path("site") / "index.html").write_text(html)
-
-# Copy static files
-for asset in Path("static").glob("*"):
-    (Path("site/static") / asset.name).write_bytes(asset.read_bytes())
-
-print("✅ Site built! Open site/index.html to preview.")
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SD Sports Decals</title>
-  <link rel="stylesheet" href="static/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SD Sports Decals</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <header class="hero">
-    <img src="static/logo.svg" class="logo" alt="SD Logo" />
-    <h1>SD Sports Decals</h1>
-    <p>Custom, high-quality decals for teams, athletes, and fans.</p>
-    <a href="#shop" class="btn-primary">Shop Decals</a>
-  </header>
 
-  <section id="shop" class="products">
-    <h2>Our Top Decals</h2>
-    <div class="product-grid">
-      {{ products }}
-    </div>
-  </section>
+    <!-- Header / Hero Section -->
+    <header class="hero">
+        <div class="logo">SD</div>
+        <h1>SD Sports Decals</h1>
+        <p>Premium sports decals for teams, athletes, and fans.</p>
+        <a href="#products" class="btn-primary">Shop Now</a>
+    </header>
 
-  <section class="testimonials">
-    <h2>What Our Customers Say</h2>
-    <blockquote>"Amazing quality! Our helmets look awesome this year." – Coach Ramirez</blockquote>
-    <blockquote>"Fast delivery and great detail." – Jordan P.</blockquote>
-  </section>
+    <!-- Product Section -->
+    <section id="products" class="products">
+        <h2>Top Selling Decals</h2>
 
-  <section class="contact">
-    <h2>Contact</h2>
-    <p>Need something custom?</p>
-    <a href="mailto:orders@sdsportsdecals.com" class="btn-secondary">Email Us</a>
-  </section>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="football.png" alt="Football Helmet Decal">
+                <h3>Football Helmet Decal</h3>
+                <p>$8.99</p>
+            </div>
 
-  <footer>
-    <p>© 2025 SD Sports Decals</p>
-  </footer>
+            <div class="product-card">
+                <img src="baseball.png" alt="Baseball Team Sticker">
+                <h3>Baseball Team Sticker</h3>
+                <p>$6.49</p>
+            </div>
+
+            <div class="product-card">
+                <img src="hockey.png" alt="Hockey Logo Decal">
+                <h3>Hockey Logo Decal</h3>
+                <p>$5.99</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2>What Teams Are Saying</h2>
+        <blockquote>"These decals made our helmets look incredible!" — Coach Martinez</blockquote>
+        <blockquote>"Fast delivery and awesome quality. 5 stars." — Jordan P.</blockquote>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <h2>Contact Us</h2>
+        <p>Need custom decals or large team orders?</p>
+        <a href="mailto:orders@sdsportsdecals.com" class="btn-secondary">Email Us</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 SD Sports Decals</p>
+    </footer>
+
 </body>
 </html>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6fa;
-  text-align: center;
-}
-
-.hero {
-  background: linear-gradient(135deg, #002b5c, #007bff);
-  color: white;
-  padding: 3rem 1rem;
-}
-
-.logo {
-  width: 140px;
-  margin-bottom: 1rem;
-}
-
-.btn-primary,
-.btn-secondary {
-  display: inline-block;
-  padding: 0.8rem 1.5rem;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  margin-top: 1.2rem;
-}
-
-.btn-primary {
-  background: white;
-  color: #002b5c;
-}
-
-.btn-secondary {
-  background: #002b5c;
-  color: white;
-}
-
-.products {
-  padding: 2rem;
-}
-
-.product-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-}
-
-.product-card {
-  background: white;
-  border-radius: 10px;
-  width: 200px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 1rem;
-}
-
-.product-card img {
-  width: 100%;
-  border-radius: 8px;
-}
-
-.testimonials {
-  background: #e7ebf3;
-  padding: 2rem;
-}
-
-.contact {
-  padding: 2rem;
-}
-
-footer {
-  background: #002b5c;
-  color: white;
-  padding: 1rem;
-}
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
-  <defs>
-    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#002b5c"/>
-      <stop offset="100%" stop-color="#007bff"/>
-    </linearGradient>
-  </defs>
-  <rect width="400" height="200" fill="#ffffff"/>
-  <text x="30" y="150" font-size="150" font-family="Impact" fill="url(#grad)">SD</text>
-</svg>
-[
-  {
-    "name": "Football Helmet Decal",
-    "price": "$8.99",
-    "image": "static/football.png"
-  },
-  {
-    "name": "Baseball Team Sticker",
-    "price": "$6.49",
-    "image": "static/baseball.png"
-  },
-  {
-    "name": "Hockey Logo Decal",
-    "price": "$5.99",
-    "image": "static/hockey.png"
-  }
-]
