@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Place Your Order</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            background: white;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 20px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #0070f3;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            width: 100%;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0055c9;
+        }
+    </style>
+
+    <script>
+        function sendEmail() {
+            const name = document.getElementById("name").value;
+            const product = document.getElementById("product").value;
+            const details = document.getElementById("details").value;
+
+            const email = "orders@sdsportsdecals.com"; // CHANGE THIS TO YOUR EMAIL
+            const subject = encodeURIComponent("New Order from " + name);
+            const body = encodeURIComponent(
+                "Customer Name: " + name + "\n" +
+                "Product: " + product + "\n\n" +
+                "Order Details:\n" + details
+            );
+
+            const mailtoLink = `mailto:${email}?subject=${subject}&body=${body}`;
+            window.location.href = mailtoLink;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Place Your Order</h1>
+    <div class="container">
+        <label>Your Name</label>
+        <input id="name" type="text" placeholder="Enter your full name" required />
+
+        <label>Product</label>
+        <select id="product">
+            <option value="Custom Football Helmet Decal">Custom Football Helmet Decal</option>
+            <option value="Team Logo Sticker Pack">Team Logo Sticker Pack</option>
+            <option value="Football Visor">Football Visor</option>
+        </select>
+
+        <label>Order Details</label>
+        <textarea id="details" rows="5" placeholder="Describe colors, sizes, quantity, or customization"></textarea>
+
+        <button onclick="sendEmail()">Submit Order</button>
+    </div>
+</body>
+</html>
